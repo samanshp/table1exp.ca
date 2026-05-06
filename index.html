@@ -381,6 +381,49 @@ nav ul a:hover { color: var(--tomato); }
   max-width: 560px;
 }
 
+/* ============ PIZZA MENU ============ */
+.pizza-menu { background: var(--bone); }
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+.pizza-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pizza-card .pizza-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid var(--rule);
+}
+.pizza-card .pizza-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.pizza-card:hover .pizza-img-wrap img { transform: scale(1.06); }
+.pizza-card .pizza-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.pizza-card .pizza-name .dot { color: var(--tomato); }
+.pizza-card .pizza-toppings {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink);
+  opacity: 0.65;
+  line-height: 1.5;
+}
+
 /* ============ TESTIMONIAL ============ */
 .testimonial {
   position: relative;
@@ -772,6 +815,7 @@ footer .footer-bottom {
     gap: 40px;
   }
   .night .timeline { grid-template-columns: 100px 1fr; gap: 24px; }
+  .pizza-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
   .night .step.time { font-size: 24px; }
   footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .section-header { flex-direction: column; gap: 12px; }
@@ -789,7 +833,7 @@ footer .footer-bottom {
     <li><a href="#area">Where we go</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="#book" class="cta-btn">Book a Date <span class="arrow">→</span></a>
+  <a href="#book" class="cta-btn">Request Quote <span class="arrow">→</span></a>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -804,7 +848,6 @@ footer .footer-bottom {
       <span>Mobile Pizzeria</span>
       <span>Catered Events</span>
       <span>Metro Vancouver</span>
-      <span>Est. 2026</span>
     </div>
 
     <h1>
@@ -818,7 +861,7 @@ footer .footer-bottom {
         made in front of your guests<span class="accent">.</span>
       </div>
       <div class="actions">
-        <a href="#book" class="cta-btn">Check Your Date <span class="arrow">→</span></a>
+        <a href="#book" class="cta-btn">Request Quote <span class="arrow">→</span></a>
       </div>
     </div>
 
@@ -933,6 +976,76 @@ footer .footer-bottom {
   </div>
 </section>
 
+<!-- ============ PIZZA MENU ============ -->
+<section class="pizza-menu">
+  <div class="container">
+    <div class="section-header">
+      <h2>Choose your<br/>pie<span class="dot">.</span></h2>
+      <span class="num">The Menu</span>
+    </div>
+    <div class="pizza-grid">
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-margherita.jpg" alt="Margherita pizza" />
+        </div>
+        <div class="pizza-name">margherita<span class="dot">.</span></div>
+        <div class="pizza-toppings">San marzano tomato, fior di latte, fresh basil, parmigiano</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-pepperoni.jpg" alt="Pepperoni pizza" />
+        </div>
+        <div class="pizza-name">pepperoni<span class="dot">.</span></div>
+        <div class="pizza-toppings">Spicy pepperoni, fior di latte, tomato, fresh basil</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-burrata.jpg" alt="Burrata and prosciutto pizza" />
+        </div>
+        <div class="pizza-name">burrata<span class="dot">.</span></div>
+        <div class="pizza-toppings">Prosciutto, wild arugula, fresh burrata, shaved parmigiano</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-funghi.jpg" alt="Funghi mushroom pizza" />
+        </div>
+        <div class="pizza-name">funghi<span class="dot">.</span></div>
+        <div class="pizza-toppings">Mixed mushrooms, truffle oil, fresh thyme, fior di latte</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-chicken-pesto.jpg" alt="Chicken pesto pizza" />
+        </div>
+        <div class="pizza-name">chicken pesto<span class="dot">.</span></div>
+        <div class="pizza-toppings">Grilled chicken, basil pesto, sun-dried tomatoes, fior di latte</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-bbq-chicken.jpg" alt="BBQ chicken pizza" />
+        </div>
+        <div class="pizza-name">bbq chicken<span class="dot">.</span></div>
+        <div class="pizza-toppings">Chicken, caramelized onions, mushrooms, BBQ sauce, crumbled feta</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/topping-honey-pistachio.jpg" alt="Honey and pistachio pizza" />
+        </div>
+        <div class="pizza-name">honey pistachio<span class="dot">.</span></div>
+        <div class="pizza-toppings">White base, prosciutto, honey drizzle, crushed pistachios</div>
+      </div>
+
+    </div>
+    <p style="text-align:center;margin-top:40px;font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;opacity:0.6;color:var(--ink);">All pizzas available in vegetarian &amp; vegan variations. Custom pies welcome.</p>
+  </div>
+</section>
+
 <!-- ============ GALLERY ============ -->
 <section>
   <div class="container">
@@ -1039,7 +1152,6 @@ footer .footer-bottom {
         <p><span class="lede">Table One is a two-person operation, by design.</span></p>
         <p>We&rsquo;re husband and wife &mdash; one of us behind the oven, the other running the floor. We started Table One because we wanted to build the kind of catering experience we&rsquo;d actually want at our own wedding: warm, unhurried, and built around great food made in front of you.</p>
         <p>Every event we book, we run ourselves. No subcontractors, no rotating staff. The people you meet at your discovery call are the same people firing pizzas at your event.</p>
-        <div class="signature">— <span class="names">Sam &amp; Co.</span></div>
       </div>
     </div>
   </div>
@@ -1092,7 +1204,7 @@ footer .footer-bottom {
       <div>
         <h5>Bookings</h5>
         <ul>
-          <li><a href="#book">Check a date</a></li>
+          <li><a href="#book">Request quote</a></li>
           <li>Press / collabs</li>
         </ul>
       </div>
