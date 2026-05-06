@@ -821,6 +821,67 @@ footer .footer-bottom {
   .section-header { flex-direction: column; gap: 12px; }
   .hero { min-height: 580px; }
 }
+
+/* ============ GALLERY SLIDER ============ */
+.gallery-section { background: var(--ink); padding: 80px 0 0; }
+.gallery-section .section-header h2 { color: var(--bone); }
+.gallery-section .section-header { border-bottom-color: rgba(255,255,255,0.15); margin-bottom: 0; }
+.gallery-section .section-tag {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: normal; font-weight: 600;
+  font-size: 13px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--bone); opacity: 0.55;
+}
+.slider-wrap {
+  position: relative; width: 100%; height: 640px;
+  overflow: hidden; margin-top: 40px;
+}
+.slider-track {
+  display: flex; height: 100%;
+  transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
+  will-change: transform;
+}
+.slide {
+  flex: 0 0 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink);
+}
+.slide img {
+  max-width: 100%; height: 100%; width: auto;
+  object-fit: contain; display: block;
+  user-select: none; pointer-events: none;
+  -webkit-user-drag: none;
+}
+.slider-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(26,22,16,0.65);
+  color: var(--bone); font-size: 20px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(6px); line-height: 1;
+}
+.slider-btn:hover { border-color: var(--tomato); background: var(--tomato); }
+.slider-btn.prev { left: 28px; }
+.slider-btn.next { right: 28px; }
+.slider-dots {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 10;
+}
+.slider-dot {
+  width: 7px; height: 7px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.3); cursor: pointer; padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.slider-dot.active { background: var(--tomato); transform: scale(1.45); }
+@media (max-width: 768px) {
+  .slider-wrap { height: 72vw; }
+  .slider-btn { width: 40px; height: 40px; font-size: 16px; }
+  .slider-btn.prev { left: 12px; }
+  .slider-btn.next { right: 12px; }
+}
+
 </style>
 </head>
 <body>
@@ -1047,34 +1108,37 @@ footer .footer-bottom {
 </section>
 
 <!-- ============ GALLERY ============ -->
-<section>
+<section class="gallery-section">
   <div class="container">
     <div class="section-header">
       <h2>Past events<span class="dot">.</span></h2>
-      <span class="num" style="font-family:'Bricolage Grotesque',sans-serif;font-style:normal;font-weight:600;font-size:13px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink);">@table1exp</span>
+      <span class="section-tag">@table1exp</span>
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="images/gallery-1-margherita.jpg" alt="Margherita pizza" />
-        <span class="label">Margherita</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery-2-burrata.jpg" alt="Pizza with burrata, prosciutto and arugula" />
-        <span class="label">The Signature</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery-3-pepperoni.jpg" alt="Pepperoni pizza overhead with lemons" />
-        <span class="label">Pepperoni</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery-4-kid.jpg" alt="Young guest enjoying a slice" />
-        <span class="label">Family Event</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/gallery-5-guest.jpg" alt="Guest enjoying a slice" />
-        <span class="label">Private Party</span>
-      </div>
+  </div>
+  <div class="slider-wrap">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide"><img src="images/gallery/Table-one-45.jpg" alt="Evening event" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-50.jpg" alt="Pizza being made" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-54.jpg" alt="Fresh pizza" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-59.jpg" alt="Behind the scenes" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-61.jpg" alt="Private event" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-65.jpg" alt="Pizza in action" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-70.jpg" alt="Event atmosphere" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-73.jpg" alt="Table one experience" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-84.jpg" alt="Signature pizza" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-86.jpg" alt="Live catering" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-92.jpg" alt="Outdoor event" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-95.jpg" alt="Artisan pizza" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-122.jpg" alt="Event close-up" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-124.jpg" alt="Pizza night" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-129.jpg" alt="Catering setup" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-131.jpg" alt="Fresh ingredients" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-143.jpg" alt="Wood-fired experience" loading="lazy" /></div>
+      <div class="slide"><img src="images/gallery/Table-one-145.jpg" alt="Celebration" loading="lazy" /></div>
     </div>
+    <button class="slider-btn prev" id="sliderPrev" aria-label="Previous slide">&#8592;</button>
+    <button class="slider-btn next" id="sliderNext" aria-label="Next slide">&#8594;</button>
+    <div class="slider-dots" id="sliderDots"></div>
   </div>
 </section>
 
@@ -1216,6 +1280,55 @@ footer .footer-bottom {
     </div>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  var track = document.getElementById('sliderTrack');
+  if(!track) return;
+  var slides = track.querySelectorAll('.slide');
+  var dotsWrap = document.getElementById('sliderDots');
+  var total = slides.length;
+  var current = 0;
+
+  // Build dots
+  for(var i = 0; i < total; i++){
+    (function(idx){
+      var dot = document.createElement('button');
+      dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (idx+1));
+      dot.addEventListener('click', function(){ goTo(idx); });
+      dotsWrap.appendChild(dot);
+    })(i);
+  }
+
+  function goTo(n){
+    current = ((n % total) + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    var dots = dotsWrap.querySelectorAll('.slider-dot');
+    for(var i = 0; i < dots.length; i++){
+      dots[i].classList.toggle('active', i === current);
+    }
+  }
+
+  document.getElementById('sliderPrev').addEventListener('click', function(){ goTo(current - 1); });
+  document.getElementById('sliderNext').addEventListener('click', function(){ goTo(current + 1); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft') goTo(current - 1);
+    if(e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  // Touch swipe
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+  }, {passive:true});
+})();
+</script>
 
 </body>
 </html>
