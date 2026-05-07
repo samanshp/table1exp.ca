@@ -745,7 +745,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     }
   } catch (err) {
     status.className = 'form-status error';
-    status.innerHTML = 'Something went wrong. Please email us directly at <a href="mailto:hello@table1exp.ca" style="color:inherit;text-decoration:underline">hello@table1exp.ca</a>.';
+    status.innerHTML = 'Error: ' + err.message + '. Please email us at <a href="mailto:hello@table1exp.ca" style="color:inherit;text-decoration:underline">hello@table1exp.ca</a>.';
     status.style.display = 'block';
     btn.innerHTML = 'Send Request <span class="arrow">&rarr;</span>';
     btn.disabled = false;
