@@ -112,6 +112,8 @@ nav {
   align-items: center;
 }
 nav .logo {
+  text-decoration: none;
+  color: var(--ink);
   font-family: 'Fraunces', serif;
   font-weight: 900;
   font-style: italic;
@@ -804,7 +806,7 @@ footer .footer-bottom {
 }
 
 /* ============ GALLERY SLIDER ============ */
-.gallery-section { background: var(--ink); padding: 80px 0 0; }
+.gallery-section { background: var(--ink); padding: 80px 0 100px; }
 .gallery-section .section-header h2 { color: var(--bone); }
 .gallery-section .section-header { border-bottom-color: rgba(255,255,255,0.15); margin-bottom: 0; }
 .gallery-section .section-tag {
@@ -830,7 +832,7 @@ footer .footer-bottom {
 .slide img {
   max-width: 100%; height: 100%; width: auto;
   object-fit: contain; display: block;
-  user-select: none; pointer-events: none;
+  user-select: none;
   -webkit-user-drag: none;
 }
 .slider-btn {
@@ -961,7 +963,7 @@ footer .footer-bottom {
 .lightbox-next { right: 20px; }
 .lightbox-prev:hover,
 .lightbox-next:hover { background: rgba(255,255,255,0.24); }
-.slide img { cursor: zoom-in; }
+.slide { cursor: zoom-in; }
 </style>
 </head>
 <body>
@@ -1472,10 +1474,11 @@ footer .footer-bottom {
 
   // Click on slide images
   document.addEventListener('click', function(e) {
-    var img = e.target.closest('.slide img');
-    if (img) {
+    var slide = e.target.closest('.slide');
+    if (slide) {
       if (!images.length) collectImages();
-      var idx = images.findIndex(function(i) { return i.src === img.src; });
+      var img = slide.querySelector('img');
+      var idx = images.findIndex(function(i) { return img && i.src === img.src; });
       openLightbox(idx >= 0 ? idx : 0);
     }
   });
