@@ -964,6 +964,142 @@ footer .footer-bottom {
 .lightbox-prev:hover,
 .lightbox-next:hover { background: rgba(255,255,255,0.24); }
 .slide { cursor: zoom-in; }
+
+/* ============ PRICING ============ */
+.pricing { background: var(--ink); color: var(--bone); padding: 120px 0; }
+.pricing .section-header { border-bottom-color: rgba(255,255,255,0.15); }
+.pricing .section-header h2 { color: var(--bone); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+.pricing-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.2s;
+  background: rgba(255,255,255,0.04);
+}
+.pricing-card:hover { border-color: rgba(255,255,255,0.3); }
+.pricing-card.featured {
+  border-color: var(--tomato);
+  background: rgba(214,52,38,0.07);
+  position: relative;
+}
+.pricing-tag {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tomato);
+  color: var(--bone);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.pricing-guests {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 14px;
+}
+.pricing-card h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.pricing-card h3 .dot { color: var(--tomato); }
+.pricing-card p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  opacity: 0.65;
+  flex: 1;
+  margin-bottom: 32px;
+}
+.pricing-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 28px;
+}
+.pricing-amount {
+  margin-bottom: 28px;
+}
+.pricing-amount .from {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  display: block;
+  margin-bottom: 4px;
+}
+.pricing-amount .price {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--bone);
+}
+.pricing-amount .price.contact {
+  font-size: 1.5rem;
+  opacity: 0.75;
+}
+.pricing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 100px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: var(--bone);
+  background: transparent;
+}
+.pricing-btn:hover {
+  background: var(--bone);
+  color: var(--ink);
+  border-color: var(--bone);
+}
+.pricing-card.featured .pricing-btn {
+  background: var(--tomato);
+  border-color: var(--tomato);
+  color: var(--bone);
+}
+.pricing-card.featured .pricing-btn:hover {
+  background: var(--bone);
+  color: var(--ink);
+  border-color: var(--bone);
+}
+.pricing-note {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.35;
+}
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+}
 </style>
 </head>
 <body>
@@ -1132,6 +1268,63 @@ footer .footer-bottom {
 
     </div>
 </section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Simple pricing<span class="dot">.</span></h2>
+      <span class="num">N°1—N°3</span>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- TIER 1 -->
+      <div class="pricing-card">
+        <div class="pricing-guests">10 – 15 guests</div>
+        <h3>The gathering<span class="dot">.</span></h3>
+        <p>A focused, intimate setup — one chef, one oven, and a menu of up to four pies made fresh to order. Perfect for birthdays, small dinners, and backyard celebrations.</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-amount">
+          <span class="from">Starting at</span>
+          <span class="price">$1,000</span>
+        </div>
+        <a href="/pricing" class="pricing-btn">Request a quote →</a>
+      </div>
+
+      <!-- TIER 2 -->
+      <div class="pricing-card featured">
+        <div class="pricing-tag">Most popular</div>
+        <div class="pricing-guests">15 – 30 guests</div>
+        <h3>The event<span class="dot">.</span></h3>
+        <p>The full table one. experience — a live oven station that becomes the centrepiece of your event. Ideal for corporate dinners, weddings, and larger private parties.</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-amount">
+          <span class="from">Starting at</span>
+          <span class="price">$1,600</span>
+        </div>
+        <a href="/pricing" class="pricing-btn">Request a quote →</a>
+      </div>
+
+      <!-- TIER 3 -->
+      <div class="pricing-card">
+        <div class="pricing-guests">30+ guests</div>
+        <h3>The full show<span class="dot">.</span></h3>
+        <p>Larger events need a tailored approach. Tell us about your venue, your guest count, and what you have in mind — we'll put together a custom quote that fits.</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-amount">
+          <span class="from">Let's talk</span>
+          <span class="price contact">Custom quote</span>
+        </div>
+        <a href="mailto:hello@table1exp.ca" class="pricing-btn">Email us →</a>
+      </div>
+
+    </div>
+
+    <p class="pricing-note">All prices in CAD. Setup and takedown included. Travel fees may apply outside Metro Vancouver.</p>
+  </div>
+</section>
+
 
 <!-- ============ GALLERY ============ -->
 <section class="gallery-section">
