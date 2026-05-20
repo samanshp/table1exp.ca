@@ -966,9 +966,9 @@ footer .footer-bottom {
 .slide { cursor: zoom-in; }
 
 /* ============ PRICING ============ */
-.pricing { background: var(--ink); color: var(--bone); padding: 120px 0; }
-.pricing .section-header { border-bottom-color: rgba(255,255,255,0.15); }
-.pricing .section-header h2 { color: var(--bone); }
+.pricing { background: var(--bone-2); color: var(--ink); padding: 120px 0; }
+.pricing .section-header { border-bottom-color: var(--rule); }
+.pricing .section-header h2 { color: var(--ink); }
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -976,19 +976,19 @@ footer .footer-bottom {
   margin-top: 64px;
 }
 .pricing-card {
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid var(--rule);
   border-radius: 16px;
   padding: 40px 36px;
   display: flex;
   flex-direction: column;
   gap: 0;
-  transition: border-color 0.2s;
-  background: rgba(255,255,255,0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--bone);
 }
-.pricing-card:hover { border-color: rgba(255,255,255,0.3); }
+.pricing-card:hover { border-color: rgba(22,20,18,0.35); box-shadow: 0 4px 24px rgba(22,20,18,0.08); }
 .pricing-card.featured {
   border-color: var(--tomato);
-  background: rgba(214,52,38,0.07);
+  background: var(--bone);
   position: relative;
 }
 .pricing-tag {
@@ -1032,7 +1032,7 @@ footer .footer-bottom {
 }
 .pricing-divider {
   height: 1px;
-  background: rgba(255,255,255,0.1);
+  background: var(--rule);
   margin-bottom: 28px;
 }
 .pricing-amount {
@@ -1053,7 +1053,7 @@ footer .footer-bottom {
   font-weight: 900;
   font-size: 2.8rem;
   line-height: 1;
-  color: var(--bone);
+  color: var(--ink);
 }
 .pricing-amount .price.contact {
   font-size: 1.5rem;
@@ -1073,13 +1073,14 @@ footer .footer-bottom {
   transition: background 0.2s, border-color 0.2s, color 0.2s;
   text-decoration: none;
   border: 1.5px solid rgba(255,255,255,0.25);
-  color: var(--bone);
+  color: var(--ink);
   background: transparent;
+  border-color: var(--rule);
 }
 .pricing-btn:hover {
-  background: var(--bone);
-  color: var(--ink);
-  border-color: var(--bone);
+  background: var(--ink);
+  color: var(--bone);
+  border-color: var(--ink);
 }
 .pricing-card.featured .pricing-btn {
   background: var(--tomato);
@@ -1095,7 +1096,7 @@ footer .footer-bottom {
   margin-top: 40px;
   text-align: center;
   font-size: 0.8rem;
-  opacity: 0.35;
+  opacity: 0.5;
 }
 @media (max-width: 900px) {
   .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
@@ -1287,9 +1288,9 @@ footer .footer-bottom {
         <div class="pricing-divider"></div>
         <div class="pricing-amount">
           <span class="from">Starting at</span>
-          <span class="price">$1,000</span>
+          <span class="price">$800</span>
         </div>
-        <a href="/pricing" class="pricing-btn">Request a quote →</a>
+        <a href="/pricing" class="pricing-btn">Book now →</a>
       </div>
 
       <!-- TIER 2 -->
@@ -1301,9 +1302,9 @@ footer .footer-bottom {
         <div class="pricing-divider"></div>
         <div class="pricing-amount">
           <span class="from">Starting at</span>
-          <span class="price">$1,600</span>
+          <span class="price">$1,500</span>
         </div>
-        <a href="/pricing" class="pricing-btn">Request a quote →</a>
+        <a href="/pricing" class="pricing-btn">Book now →</a>
       </div>
 
       <!-- TIER 3 -->
@@ -1428,7 +1429,7 @@ footer .footer-bottom {
         </div>
 
         <div class="min-block">
-          <div class="number">15</div>
+          <div class="number">10</div>
           <div class="label">
             Guest Minimum
           </div>
