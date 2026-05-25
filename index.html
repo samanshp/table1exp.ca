@@ -426,6 +426,16 @@ nav ul a:hover { color: var(--tomato); }
   line-height: 1.5;
 }
 
+
+/* ============ SALAD MENU ============ */
+.salad-menu { background: var(--bone-2); }
+.salad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
+  max-width: 560px;
+  margin: 0 auto;
+}
 /* ============ TESTIMONIAL ============ */
 .testimonial {
   position: relative;
@@ -1258,6 +1268,36 @@ footer .footer-bottom {
     <p style="text-align:center;margin-top:40px;font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;opacity:0.6;color:var(--ink);">All pizzas available in vegetarian &amp; vegan variations. Custom pies welcome.</p>
   </div>
 </section>
+
+<!-- ============ SALADS ============ -->
+<section class="salad-menu" id="salads">
+  <div class="container">
+    <div class="section-header">
+      <h2>Fresh sides<span class="dot">.</span></h2>
+      <span class="num">Salads</span>
+    </div>
+    <div class="salad-grid">
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/salad-crudite.jpg" alt="Fresh seasonal vegetable crudité platter with house-made hummus — table one. catering Vancouver" />
+        </div>
+        <div class="pizza-name">crudité<span class="dot">.</span></div>
+        <div class="pizza-toppings">Seasonal raw vegetables, beets, radishes, snap peas, carrots, cucumber, house-made hummus</div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="images/salad-arugula-pear.jpg" alt="Arugula and pear salad with blue cheese and walnuts — event catering Metro Vancouver" />
+        </div>
+        <div class="pizza-name">arugula & pear<span class="dot">.</span></div>
+        <div class="pizza-toppings">Arugula, sliced pear, blue cheese, candied walnuts, honey vinaigrette</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ PILLARS ============ -->
 <section class="pillars" id="how">
