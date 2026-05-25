@@ -1125,6 +1125,88 @@ footer .footer-bottom {
 @media (max-width: 900px) {
   .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
 }
+
+/* ============ SALAD LIGHTBOX ============ */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(22,20,18,0.94);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-inner {
+  position: relative;
+  max-width: 860px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.lightbox-img-wrap {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  max-height: 70vh;
+  max-width: 70vh;
+}
+.lightbox-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lightbox-counter {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(241,236,226,0.5);
+  letter-spacing: 0.04em;
+}
+.lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -8px;
+  background: none;
+  border: none;
+  color: var(--bone);
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.55;
+  line-height: 1;
+  transition: opacity 0.2s;
+  padding: 8px;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1.5px solid rgba(241,236,226,0.25);
+  border-radius: 50%;
+  color: var(--bone);
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-arrow:hover { opacity: 1; border-color: var(--bone); }
+.lightbox-arrow.prev { left: 20px; }
+.lightbox-arrow.next { right: 20px; }
+.pizza-card.clickable { cursor: pointer; }
+.pizza-card.clickable .pizza-img-wrap { transition: opacity 0.2s; }
+.pizza-card.clickable:hover .pizza-img-wrap { opacity: 0.88; }
+
 </style>
 </head>
 <body>
@@ -1278,7 +1360,7 @@ footer .footer-bottom {
     </div>
     <div class="salad-grid">
 
-      <div class="pizza-card">
+      <div class="pizza-card clickable" onclick="openLightbox('crudite')">
         <div class="pizza-img-wrap">
           <img src="images/salad-crudite.jpg" alt="Fresh seasonal vegetable crudité platter with house-made hummus — table one. catering Vancouver" />
         </div>
@@ -1286,7 +1368,7 @@ footer .footer-bottom {
         <div class="pizza-toppings">Seasonal raw vegetables, beets, radishes, snap peas, carrots, cucumber, house-made hummus</div>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card clickable" onclick="openLightbox('arugula')">
         <div class="pizza-img-wrap">
           <img src="images/salad-arugula-pear.jpg" alt="Arugula and pear salad with blue cheese and walnuts — event catering Metro Vancouver" />
         </div>
@@ -1770,5 +1852,73 @@ function toggleMenu() {
   document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
 }
 </script>
+
+<!-- ============ SALAD LIGHTBOX ============ -->
+<div class="lightbox-overlay" id="saladLightbox" onclick="closeLightboxOnBg(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+  <button class="lightbox-arrow prev" onclick="stepLightbox(-1)" aria-label="Previous">&#8592;</button>
+  <button class="lightbox-arrow next" onclick="stepLightbox(1)"  aria-label="Next">&#8594;</button>
+</div>
+
+<script>
+const saladImages = {
+  crudite: [
+    { src: 'images/salad-crudite.jpg',   alt: 'Crudité platter — overhead view' },
+    { src: 'images/salad-crudite-2.jpg', alt: 'Crudité platter — detail' },
+    { src: 'images/salad-crudite-3.jpg', alt: 'Crudité platter — close-up' }
+  ],
+  arugula: [
+    { src: 'images/salad-arugula-pear.jpg', alt: 'Arugula & pear salad — overhead' },
+    { src: 'images/salad-arugula-2.jpg',    alt: 'Arugula & pear salad — detail'   }
+  ]
+};
+
+let lbImages = [], lbIndex = 0;
+
+function openLightbox(key) {
+  lbImages = saladImages[key];
+  lbIndex  = 0;
+  renderLightbox();
+  document.getElementById('saladLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('saladLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOnBg(e) {
+  if (e.target === document.getElementById('saladLightbox')) closeLightbox();
+}
+
+function stepLightbox(dir) {
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  renderLightbox();
+}
+
+function renderLightbox() {
+  const img = document.getElementById('lightboxImg');
+  img.src = lbImages[lbIndex].src;
+  img.alt = lbImages[lbIndex].alt;
+  document.getElementById('lightboxCounter').textContent =
+    (lbIndex + 1) + ' / ' + lbImages.length;
+}
+
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('saladLightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   stepLightbox(-1);
+  if (e.key === 'ArrowRight')  stepLightbox(1);
+});
+</script>
+
 </body>
 </html>
