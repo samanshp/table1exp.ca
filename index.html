@@ -1207,6 +1207,155 @@ footer .footer-bottom {
 .pizza-card.clickable .pizza-img-wrap { transition: opacity 0.2s; }
 .pizza-card.clickable:hover .pizza-img-wrap { opacity: 0.88; }
 
+
+/* ============ PRICING CALCULATOR ============ */
+.pricing-calc { background: var(--bone-2); color: var(--ink); padding: 100px 0 90px; }
+.pricing-calc .pc-inner { max-width: 1080px; margin: 0 auto; padding: 0 clamp(18px,4vw,40px); }
+
+.pc-rule { height: 1px; background: var(--rule); margin-bottom: 44px; }
+
+.pc-label {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(22,20,18,0.55);
+}
+
+.pc-display {
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 900;
+  letter-spacing: -0.02em; line-height: 1.15;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.pc-display .dot, .pc-display .qm { color: var(--tomato); }
+
+/* Layout */
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px; align-items: stretch;
+}
+
+.pc-card {
+  background: var(--bone);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 30px 30px 34px;
+  display: flex; flex-direction: column; gap: 26px;
+}
+.pc-card.result { border: 1.5px solid var(--tomato); padding: 30px; gap: 22px; }
+
+/* Stepper */
+.pc-stepper { display: flex; align-items: center; gap: 14px; }
+.pc-step-btn {
+  width: 46px; height: 46px; flex: none; border-radius: 50%;
+  background: transparent; border: 1px solid rgba(22,20,18,0.3);
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; line-height: 1;
+  color: var(--ink); cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.pc-step-btn:hover { border-color: var(--tomato); color: var(--tomato); }
+.pc-count-wrap { flex: 1; text-align: center; }
+.pc-count { font-size: 56px; line-height: 1; }
+.pc-count-cap { margin-top: 6px; }
+
+/* Slider */
+.pc-slider { width: 100%; height: 30px; cursor: pointer; accent-color: var(--tomato); }
+.pc-slider-ends {
+  display: flex; justify-content: space-between; margin-top: -2px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10.5px; letter-spacing: 0.1em; color: rgba(22,20,18,0.5);
+}
+
+.pc-hair { height: 1px; background: var(--rule); }
+
+/* Gourmet pills */
+.pc-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pc-pill {
+  flex: 1; min-width: 92px; padding: 11px 8px; border-radius: 999px;
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(22,20,18,0.28); background: transparent; color: var(--ink);
+  cursor: pointer; transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.pc-pill:hover:not(:disabled):not(.active) { border-color: rgba(22,20,18,0.55); }
+.pc-pill.active { background: var(--tomato); border-color: var(--tomato); color: var(--bone); }
+.pc-pill:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.pc-help { font-size: 11.5px; line-height: 1.65; color: rgba(22,20,18,0.6); margin-top: 12px; }
+.pc-foot-copy { font-size: 12.5px; line-height: 1.7; color: rgba(22,20,18,0.68); }
+
+/* Result card */
+.pc-res-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.pc-tier-name { font-size: 27px; }
+.pc-stack { display: grid; gap: 18px; }
+.pc-price-block { border-top: 1px solid var(--rule); padding-top: 16px; }
+.pc-price { font-size: clamp(38px, 5vw, 56px); line-height: 1; margin-top: 8px; }
+.pc-price.custom { font-size: clamp(26px, 3.5vw, 34px); color: var(--tomato); }
+.pc-price-sub { font-size: 11.5px; color: rgba(22,20,18,0.6); margin-top: 10px; }
+.pc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; }
+.pc-stat { border-top: 1px solid var(--rule); padding-top: 16px; }
+.pc-stat-val { font-size: 26px; line-height: 1.2; margin-top: 8px; }
+.pc-note { font-size: 12.5px; line-height: 1.7; color: rgba(22,20,18,0.68); margin-top: -4px; }
+
+.pc-cta {
+  margin-top: auto; display: block; text-align: center;
+  background: var(--tomato); color: var(--bone);
+  border-radius: 999px; padding: 15px 20px;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600;
+  font-size: 13px; letter-spacing: 0.02em; text-decoration: none;
+  transition: background 0.2s;
+}
+.pc-cta:hover { background: var(--tomato-2); }
+
+/* Tables */
+.pc-table-block { margin-top: 44px; }
+.pc-table-head-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+.pc-table-head-row.with-intro { margin-bottom: 10px; }
+.pc-table-title { font-size: 22px; }
+.pc-table-head-row .fill { flex: 1; height: 1px; background: var(--rule); }
+.pc-table-intro {
+  font-size: 12.5px; line-height: 1.7; color: rgba(22,20,18,0.68);
+  max-width: 62ch; margin-bottom: 18px;
+}
+.pc-table-wrap {
+  background: var(--bone); border: 1px solid var(--rule);
+  border-radius: 12px; overflow-x: auto; overflow-y: hidden;
+}
+.pc-thead, .pc-trow { display: grid; }
+.pc-thead {
+  background: var(--ink); color: var(--bone-2);
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600;
+  font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 14px 24px;
+}
+.pc-trow {
+  padding: 15px 24px; font-size: 13px;
+  border-top: 1px solid rgba(22,20,18,0.12);
+  transition: background 0.15s;
+}
+.pc-trow.active { background: rgba(214,52,38,0.09); }
+.pc-thead > div:last-child, .pc-trow > div:last-child { text-align: right; }
+.pc-trow > div:last-child { font-weight: 600; }
+
+.pc-t1 { grid-template-columns: 1.1fr 1fr 1fr 0.9fr; min-width: 620px; }
+.pc-t2 { grid-template-columns: 1fr 1.25fr 1.25fr 1fr; min-width: 680px; }
+
+.pc-footnote {
+  text-align: center; font-size: 11.5px;
+  color: rgba(22,20,18,0.5); margin-top: 34px; line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .pricing-calc { padding: 72px 0 60px; }
+  .pc-card { padding: 26px 22px 30px; }
+  .pc-card.result { padding: 26px 22px; }
+  .pc-count { font-size: 46px; }
+}
+
 </style>
 </head>
 <body>
@@ -1421,57 +1570,114 @@ footer .footer-bottom {
 </section>
 
 <!-- ============ PRICING ============ -->
-<section class="pricing">
-  <div class="container">
-    <div class="section-header">
-      <h2>Simple pricing<span class="dot">.</span></h2>
+<!-- ============ PRICING CALCULATOR ============ -->
+<section class="pricing-calc" id="pricing">
+  <div class="pc-inner">
+    <h2 class="pc-display" style="font-size:clamp(40px,6vw,68px);line-height:1;margin:0 0 28px;">Simple pricing<span class="dot">.</span></h2>
+    <div class="pc-rule"></div>
+
+    <div class="pc-grid">
+
+      <!-- INPUT CARD -->
+      <div class="pc-card">
+        <div>
+          <div class="pc-label" style="margin-bottom:14px;">Step one</div>
+          <div class="pc-display pc-tier-name">How many guests<span class="qm">?</span></div>
+        </div>
+
+        <div class="pc-stepper">
+          <button type="button" class="pc-step-btn" id="pcMinus" aria-label="Fewer guests">&ndash;</button>
+          <div class="pc-count-wrap">
+            <div class="pc-display pc-count" id="pcCount">15</div>
+            <div class="pc-label pc-count-cap">guests</div>
+          </div>
+          <button type="button" class="pc-step-btn" id="pcPlus" aria-label="More guests">+</button>
+        </div>
+
+        <div>
+          <input type="range" class="pc-slider" id="pcSlider" min="1" max="55" step="1" value="15" aria-label="Guest count" />
+          <div class="pc-slider-ends"><span>1</span><span>50+</span></div>
+        </div>
+
+        <div class="pc-hair"></div>
+
+        <div>
+          <div class="pc-label" style="margin-bottom:12px;">Step two &mdash; gourmet pies</div>
+          <div class="pc-pills">
+            <button type="button" class="pc-pill active" data-g="0" aria-pressed="true">Standard</button>
+            <button type="button" class="pc-pill" data-g="1" aria-pressed="false">1 gourmet</button>
+            <button type="button" class="pc-pill" data-g="2" aria-pressed="false">2 gourmet</button>
+          </div>
+          <div class="pc-help" id="pcHelp"></div>
+        </div>
+
+        <div class="pc-hair"></div>
+
+        <div class="pc-foot-copy">Every booking is the Table one main package: a live oven station, our chef on site, setup and takedown included.</div>
+      </div>
+
+      <!-- RESULT CARD -->
+      <div class="pc-card result">
+        <div class="pc-res-head">
+          <div class="pc-display pc-tier-name"><span id="pcTierName">The gathering</span><span class="dot">.</span></div>
+          <div class="pc-label" id="pcRange">up to 15 guests</div>
+        </div>
+
+        <div class="pc-stack">
+          <div class="pc-price-block">
+            <div class="pc-label" id="pcPriceLabel">Base price</div>
+            <div class="pc-display pc-price" id="pcPrice">$800</div>
+            <div class="pc-price-sub" id="pcPriceSub" style="display:none;"></div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat">
+              <div class="pc-label">Menu selection</div>
+              <div class="pc-display pc-stat-val" id="pcMenu">3 standard</div>
+            </div>
+            <div class="pc-stat">
+              <div class="pc-label">Live serving time</div>
+              <div class="pc-display pc-stat-val" id="pcServing">1 hour</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc-note" id="pcNote"></div>
+
+        <a class="pc-cta" id="pcCta" href="/pricing">Book now &nbsp;&rarr;</a>
+      </div>
+
     </div>
 
-    <div class="pricing-grid">
-
-      <!-- TIER 1 -->
-      <div class="pricing-card">
-        <div class="pricing-guests">10 – 15 guests</div>
-        <h3>The gathering<span class="dot">.</span></h3>
-        <p>A focused, intimate setup — one chef, one oven, and a menu of up to four pies made fresh to order. Perfect for birthdays, small dinners, and backyard celebrations.</p>
-        <div class="pricing-divider"></div>
-        <div class="pricing-amount">
-          <span class="from">Starting at</span>
-          <span class="price">$800</span>
-        </div>
-        <a href="/pricing" class="pricing-btn">Book now →</a>
+    <!-- FULL BREAKDOWN TABLE -->
+    <div class="pc-table-block">
+      <div class="pc-table-head-row">
+        <div class="pc-display pc-table-title">Full breakdown</div>
+        <div class="fill"></div>
       </div>
-
-      <!-- TIER 2 -->
-      <div class="pricing-card featured">
-        <div class="pricing-tag">Most popular</div>
-        <div class="pricing-guests">15 – 30 guests</div>
-        <h3>The event<span class="dot">.</span></h3>
-        <p>The full table one. experience — a live oven station that becomes the centrepiece of your event. Ideal for corporate dinners, weddings, and larger private parties.</p>
-        <div class="pricing-divider"></div>
-        <div class="pricing-amount">
-          <span class="from">Starting at</span>
-          <span class="price">$1,500</span>
+      <div class="pc-table-wrap">
+        <div class="pc-thead pc-t1">
+          <div>Guests</div><div>Live serving time</div><div>Menu choices</div><div>Base price</div>
         </div>
-        <a href="/pricing" class="pricing-btn">Book now →</a>
+        <div id="pcTable1"></div>
       </div>
-
-      <!-- TIER 3 -->
-      <div class="pricing-card">
-        <div class="pricing-guests">30+ guests</div>
-        <h3>The full show<span class="dot">.</span></h3>
-        <p>Larger events need a tailored approach. Tell us about your venue, your guest count, and what you have in mind — we'll put together a custom quote that fits.</p>
-        <div class="pricing-divider"></div>
-        <div class="pricing-amount">
-          <span class="from">Let's talk</span>
-          <span class="price contact">Custom quote</span>
-        </div>
-        <a href="mailto:hello@table1exp.ca" class="pricing-btn">Email us →</a>
-      </div>
-
     </div>
 
-    <p class="pricing-note">All prices in CAD. Setup and takedown included. Travel fees may apply outside Metro Vancouver.</p>
+    <!-- GOURMET UPGRADE TABLE -->
+    <div class="pc-table-block">
+      <div class="pc-table-head-row with-intro">
+        <div class="pc-display pc-table-title">Gourmet upgrade</div>
+        <div class="fill"></div>
+      </div>
+      <div class="pc-table-intro">A gourmet pie replaces one of your standard choices rather than adding to them. The upgrade fee is added to the package base price.</div>
+      <div class="pc-table-wrap">
+        <div class="pc-thead pc-t2">
+          <div>Guests</div><div>With one gourmet</div><div>With two gourmet</div><div>Added cost</div>
+        </div>
+        <div id="pcTable2"></div>
+      </div>
+    </div>
+
+    <div class="pc-footnote">All prices in CAD. Setup and takedown included. Travel fees may apply outside Metro Vancouver.</div>
   </div>
 </section>
 
@@ -1918,6 +2124,146 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowLeft')   stepLightbox(-1);
   if (e.key === 'ArrowRight')  stepLightbox(1);
 });
+</script>
+
+<script>
+(function () {
+  var TIERS = [
+    { max:15, range:"up to 15 guests", name:"The gathering", base:800,  serving:"1 hour",
+      std:"3 standard", one:"2 standard + 1 gourmet", two:null, up1:150, up2:null,
+      note:"A focused, intimate setup — one chef, one oven, and three pies of your choosing made fresh to order." },
+    { max:20, range:"16 – 20 guests", name:"The gathering", base:1000, serving:"1.5 hours",
+      std:"4 standard", one:"3 standard + 1 gourmet", two:null, up1:150, up2:null,
+      note:"Room for a fourth style on the menu and a longer stretch at the oven." },
+    { max:25, range:"21 – 25 guests", name:"The event", base:1200, serving:"2 hours",
+      std:"4 standard", one:"3 standard + 1 gourmet", two:null, up1:150, up2:null,
+      note:"The live oven station becomes the centrepiece of your evening." },
+    { max:30, range:"26 – 30 guests", name:"The event", base:1450, serving:"2 hours",
+      std:"5 standard", one:"4 standard + 1 gourmet", two:null, up1:150, up2:null,
+      note:"Five styles off the menu, served continuously for two hours." },
+    { max:40, range:"31 – 40 guests", name:"The full show", base:1800, serving:"3 hours",
+      std:"5 standard", one:"4 standard + 1 gourmet", two:null, up1:200, up2:null,
+      note:"A second pair of hands at the station keeps three hours of service moving." },
+    { max:50, range:"41 – 50 guests", name:"The full show", base:2200, serving:"3 hours",
+      std:"6 standard", one:"5 standard + 1 gourmet", two:"4 standard + 2 gourmet", up1:250, up2:500,
+      note:"Our largest standard package: six styles, three hours, full crew." }
+  ];
+
+  var CUSTOM = {
+    range:"more than 50 guests", name:"Custom", base:null, serving:"Based on the event",
+    std:"Adjustable", one:"Adjustable", two:"Adjustable", up1:null, up2:null,
+    note:"Larger events need a tailored approach. Tell us about your venue, your guest count, and what you have in mind — we'll put together a quote that fits."
+  };
+
+  var MAX = 55, guests = 15, gourmet = 0;
+  var money = function (n) { return "$" + n.toLocaleString("en-US"); };
+  var tierFor = function (g) {
+    if (g > 50) return CUSTOM;
+    for (var i = 0; i < TIERS.length; i++) if (g <= TIERS[i].max) return TIERS[i];
+    return TIERS[TIERS.length - 1];
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function setCount(n) {
+    var next = Math.max(1, Math.min(MAX, n));
+    if (gourmet === 2 && !tierFor(next).two) gourmet = 1;
+    guests = next;
+    render();
+  }
+
+  function buildTables(tier, custom) {
+    var rows = TIERS.map(function (t) {
+      return {
+        guests: t.max === 15 ? "Up to 15" : t.range,
+        serving: t.serving, menu: t.std, price: money(t.base),
+        one: t.one, two: t.two || "—",
+        upgrade: t.up2 ? "+" + money(t.up1) + " / +" + money(t.up2) : "+" + money(t.up1),
+        active: !custom && t === tier
+      };
+    });
+    rows.push({
+      guests:"More than 50", serving:"Based on the event", menu:"Adjustable",
+      price:"Request a quote", one:"Adjustable", two:"Adjustable",
+      upgrade:"Custom price", active: custom
+    });
+
+    var h1 = "", h2 = "";
+    rows.forEach(function (r) {
+      var a = r.active ? " active" : "";
+      h1 += '<div class="pc-trow pc-t1' + a + '"><div>' + r.guests + '</div><div>' + r.serving +
+            '</div><div>' + r.menu + '</div><div>' + r.price + '</div></div>';
+      h2 += '<div class="pc-trow pc-t2' + a + '"><div>' + r.guests + '</div><div>' + r.one +
+            '</div><div>' + r.two + '</div><div>' + r.upgrade + '</div></div>';
+    });
+    $("pcTable1").innerHTML = h1;
+    $("pcTable2").innerHTML = h2;
+  }
+
+  function render() {
+    var tier = tierFor(guests), custom = guests > 50;
+    var upgrade = gourmet === 1 ? tier.up1 : gourmet === 2 ? tier.up2 : 0;
+    if (!upgrade) upgrade = 0;
+    var menu = gourmet === 0 ? tier.std : gourmet === 1 ? tier.one : tier.two;
+
+    $("pcCount").textContent = custom ? "50+" : guests;
+    $("pcSlider").value = guests;
+
+    $("pcTierName").textContent = tier.name;
+    $("pcRange").textContent = tier.range;
+    $("pcPriceLabel").textContent = custom ? "Let's talk" : (upgrade ? "Total" : "Base price");
+
+    var priceEl = $("pcPrice");
+    priceEl.textContent = custom ? "Request a quote" : money(tier.base + upgrade);
+    priceEl.className = "pc-display pc-price" + (custom ? " custom" : "");
+
+    var sub = $("pcPriceSub");
+    if (!custom && upgrade) {
+      sub.innerHTML = money(tier.base) + " base &nbsp;+&nbsp; " + money(upgrade) + " gourmet upgrade";
+      sub.style.display = "block";
+    } else { sub.style.display = "none"; }
+
+    $("pcMenu").textContent = menu;
+    $("pcServing").textContent = tier.serving;
+    $("pcNote").textContent = tier.note;
+
+    var cta = $("pcCta");
+    if (custom) { cta.innerHTML = "Email us &nbsp;&rarr;"; cta.href = "mailto:hello@table1exp.ca"; }
+    else { cta.innerHTML = "Book now &nbsp;&rarr;"; cta.href = "/pricing?guests=" + guests + "&gourmet=" + gourmet; }
+
+    // Pills
+    var pills = document.querySelectorAll(".pc-pill");
+    for (var i = 0; i < pills.length; i++) {
+      var g = parseInt(pills[i].getAttribute("data-g"), 10);
+      var enabled = g < 2 || !!tier.two;
+      pills[i].disabled = !enabled;
+      pills[i].classList.toggle("active", gourmet === g);
+      pills[i].setAttribute("aria-pressed", gourmet === g ? "true" : "false");
+    }
+
+    var help = "A gourmet pie isn't an extra choice — it takes the place of one of your standard choices. ";
+    help += custom ? "Gourmet counts are set with your custom quote."
+                   : (tier.two ? "" : "Two gourmet pies are available from 41 guests up.");
+    $("pcHelp").textContent = help;
+
+    buildTables(tier, custom);
+  }
+
+  $("pcMinus").addEventListener("click", function () { setCount(guests - 1); });
+  $("pcPlus").addEventListener("click", function () { setCount(guests + 1); });
+  $("pcSlider").addEventListener("input", function (e) { setCount(Number(e.target.value)); });
+
+  var pills = document.querySelectorAll(".pc-pill");
+  for (var i = 0; i < pills.length; i++) {
+    pills[i].addEventListener("click", function () {
+      if (this.disabled) return;
+      gourmet = parseInt(this.getAttribute("data-g"), 10);
+      render();
+    });
+  }
+
+  render();
+})();
 </script>
 
 </body>
