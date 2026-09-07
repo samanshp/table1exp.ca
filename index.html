@@ -1294,6 +1294,7 @@ footer .footer-bottom {
 .pc-stack { display: grid; gap: 18px; }
 .pc-price-block { border-top: 1px solid var(--rule); padding-top: 16px; }
 .pc-price { font-size: clamp(38px, 5vw, 56px); line-height: 1; margin-top: 8px; }
+.pc-price .pc-comma { margin-right: 0.055em; }
 .pc-price.custom { font-size: clamp(26px, 3.5vw, 34px); color: var(--tomato); }
 .pc-price-sub { font-size: 11.5px; color: rgba(22,20,18,0.6); margin-top: 10px; }
 .pc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; }
@@ -2095,6 +2096,7 @@ document.addEventListener('keydown', function(e) {
 
   var MAX = 55, guests = 15, gourmet = 0;
   var money = function (n) { return "$" + n.toLocaleString("en-US"); };
+  var moneyHTML = function (n) { return money(n).replace(/,/g, '<span class="pc-comma">,</span>'); };
   var tierFor = function (g) {
     if (g > 50) return CUSTOM;
     for (var i = 0; i < TIERS.length; i++) if (g <= TIERS[i].max) return TIERS[i];
@@ -2124,12 +2126,12 @@ document.addEventListener('keydown', function(e) {
     $("pcPriceLabel").textContent = custom ? "Let's talk" : (upgrade ? "Total" : "Base price");
 
     var priceEl = $("pcPrice");
-    priceEl.textContent = custom ? "Request a quote" : money(tier.base + upgrade);
+    priceEl.innerHTML = custom ? "Request a quote" : moneyHTML(tier.base + upgrade);
     priceEl.className = "pc-display pc-price" + (custom ? " custom" : "");
 
     var sub = $("pcPriceSub");
     if (!custom && upgrade) {
-      sub.innerHTML = money(tier.base) + " base &nbsp;+&nbsp; " + money(upgrade) + " gourmet upgrade";
+      sub.innerHTML = moneyHTML(tier.base) + " base &nbsp;+&nbsp; " + moneyHTML(upgrade) + " gourmet upgrade";
       sub.style.display = "block";
     } else { sub.style.display = "none"; }
 
