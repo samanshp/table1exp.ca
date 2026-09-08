@@ -695,6 +695,17 @@ footer .logo {
 
         <div class="pc-hair"></div>
 
+        <div>
+          <div class="pc-label" style="margin-bottom:12px;">Step three &mdash; salads</div>
+          <div class="pc-pills">
+            <button type="button" class="pc-pill pc-salad" data-s="crudite" aria-pressed="false">Crudit&eacute;</button>
+            <button type="button" class="pc-pill pc-salad" data-s="arugula" aria-pressed="false">Arugula &amp; pear</button>
+          </div>
+          <div class="pc-help" id="pcSaladHelp"></div>
+        </div>
+
+        <div class="pc-hair"></div>
+
         <div class="pc-foot-copy">Every booking is the Table one main package: a live oven station, our chef on site, setup and takedown included.</div>
       </div>
 
@@ -719,6 +730,10 @@ footer .logo {
             <div class="pc-stat">
               <div class="pc-label">Live serving time</div>
               <div class="pc-display pc-stat-val" id="pcServing">1 hour</div>
+            </div>
+            <div class="pc-stat">
+              <div class="pc-label">Salads</div>
+              <div class="pc-display pc-stat-val" id="pcSalads">None</div>
             </div>
           </div>
         </div>
@@ -766,6 +781,7 @@ footer .logo {
     <input type="hidden" name="access_key" value="9d2bc3a4-d37d-46a6-89ed-6b2197fa839e" />
     <input type="hidden" name="subject" value="New Quote Request — table one." />
     <input type="hidden" name="from_name" value="table1exp.ca" />
+    <input type="hidden" name="salads" id="salads_field" value="None" />
     <input type="hidden" name="redirect" value="false" />
     <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
@@ -993,6 +1009,15 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   var MAX = 55, guests = 15, gourmet = 0;
   var money = function (n) { return "$" + n.toLocaleString("en-US"); };
   var moneyHTML = function (n) { return money(n).replace(/,/g, '<span class="pc-comma">,</span>'); };
+
+  var SALAD_RATE = 80, SALAD_PER = 10;
+  var SALAD_NAMES = { crudite: "Crudit\u00e9", arugula: "Arugula & pear" };
+  var salads = { crudite: false, arugula: false };
+  var saladKeys = function () {
+    var k = []; if (salads.crudite) k.push("crudite"); if (salads.arugula) k.push("arugula"); return k;
+  };
+  var saladUnits = function (g) { return Math.ceil(g / SALAD_PER); };
+  var saladCost  = function (g) { return saladKeys().length * saladUnits(g) * SALAD_RATE; };
   var tierFor = function (g) {
     if (g > 50) return CUSTOM;
     for (var i = 0; i < TIERS.length; i++) if (g <= TIERS[i].max) return TIERS[i];
@@ -1012,6 +1037,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     var tier = tierFor(guests), custom = guests > 50;
     var upgrade = gourmet === 1 ? tier.up1 : gourmet === 2 ? tier.up2 : 0;
     if (!upgrade) upgrade = 0;
+    var sKeys = saladKeys(), sCost = custom ? 0 : saladCost(guests);
     var menu = gourmet === 0 ? tier.std : gourmet === 1 ? tier.one : tier.two;
 
     $("pcCount").textContent = custom ? "50+" : guests;
@@ -1019,15 +1045,18 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
 
     $("pcTierName").textContent = tier.name;
     $("pcRange").textContent = tier.range;
-    $("pcPriceLabel").textContent = custom ? "Let's talk" : (upgrade ? "Total" : "Base price");
+    $("pcPriceLabel").textContent = custom ? "Let's talk" : ((upgrade || sCost) ? "Total" : "Base price");
 
     var priceEl = $("pcPrice");
-    priceEl.innerHTML = custom ? "Request a quote" : moneyHTML(tier.base + upgrade);
+    priceEl.innerHTML = custom ? "Request a quote" : moneyHTML(tier.base + upgrade + sCost);
     priceEl.className = "pc-display pc-price" + (custom ? " custom" : "");
 
     var sub = $("pcPriceSub");
-    if (!custom && upgrade) {
-      sub.innerHTML = moneyHTML(tier.base) + " base &nbsp;+&nbsp; " + moneyHTML(upgrade) + " gourmet upgrade";
+    if (!custom && (upgrade || sCost)) {
+      var parts = [moneyHTML(tier.base) + " base"];
+      if (upgrade) parts.push(moneyHTML(upgrade) + " gourmet upgrade");
+      if (sCost)   parts.push(moneyHTML(sCost) + (sKeys.length > 1 ? " salads" : " salad"));
+      sub.innerHTML = parts.join(" &nbsp;+&nbsp; ");
       sub.style.display = "block";
     } else { sub.style.display = "none"; }
 
@@ -1040,13 +1069,51 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     else { cta.innerHTML = "Book now &nbsp;&rarr;"; cta.href = "#quoteForm"; var fg = document.getElementById("guests"); if (fg) fg.value = guests; }
 
     // Pills
-    var pills = document.querySelectorAll(".pc-pill");
+    var sPillEls = document.querySelectorAll(".pc-salad");
+  for (var k = 0; k < sPillEls.length; k++) {
+    sPillEls[k].addEventListener("click", function () {
+      var key = this.getAttribute("data-s");
+      salads[key] = !salads[key];
+      render();
+    });
+  }
+
+  var pills = document.querySelectorAll(".pc-pill");
     for (var i = 0; i < pills.length; i++) {
       var g = parseInt(pills[i].getAttribute("data-g"), 10);
       var enabled = g < 2 || !!tier.two;
       pills[i].disabled = !enabled;
       pills[i].classList.toggle("active", gourmet === g);
       pills[i].setAttribute("aria-pressed", gourmet === g ? "true" : "false");
+    }
+
+    // Salads
+    $("pcSalads").textContent = sKeys.length === 0 ? "None"
+      : sKeys.length === 2 ? "Both"
+      : SALAD_NAMES[sKeys[0]];
+
+    var sPills = document.querySelectorAll(".pc-salad");
+    for (var j = 0; j < sPills.length; j++) {
+      var key = sPills[j].getAttribute("data-s");
+      sPills[j].classList.toggle("active", !!salads[key]);
+      sPills[j].setAttribute("aria-pressed", salads[key] ? "true" : "false");
+    }
+
+    var sHelp;
+    if (custom) {
+      sHelp = "Salad quantities are set with your custom quote.";
+    } else {
+      sHelp = "$" + SALAD_RATE + " per salad for every " + SALAD_PER + " guests, rounded up. " +
+              "At " + guests + " guests that's " + money(saladUnits(guests) * SALAD_RATE) + " per salad.";
+    }
+    $("pcSaladHelp").textContent = sHelp;
+
+    var hidden = document.getElementById("salads_field");
+    if (hidden) {
+      hidden.value = sKeys.length
+        ? sKeys.map(function (k) { return SALAD_NAMES[k]; }).join(", ") +
+          (custom ? "" : " (" + money(sCost) + ")")
+        : "None";
     }
 
     var help = "A gourmet pie isn't an extra choice — it takes the place of one of your standard choices. ";
@@ -1063,6 +1130,9 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     if (!isNaN(qg)) guests = Math.max(1, Math.min(MAX, qg));
     if (!isNaN(qm) && qm >= 0 && qm <= 2) gourmet = qm;
     if (gourmet === 2 && !tierFor(guests).two) gourmet = 1;
+    var qs = (qp.get("salads") || "").split(",");
+    if (qs.indexOf("crudite") !== -1) salads.crudite = true;
+    if (qs.indexOf("arugula") !== -1) salads.arugula = true;
     var fg0 = document.getElementById("guests");
     if (fg0 && guests) fg0.value = guests;
   } catch (e) {}
