@@ -439,69 +439,122 @@ nav ul a:hover { color: var(--tomato); }
 /* ============ TESTIMONIAL ============ */
 .testimonial {
   position: relative;
-  padding: 140px 0;
-  overflow: hidden;
+  background: var(--ink);
   color: var(--bone);
+  padding: 110px 0;
+  overflow: hidden;
 }
-.testimonial .bg-img {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
+.testimonial .bg-img { position: absolute; inset: 0; z-index: 1; }
 .testimonial .bg-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  opacity: 0.16;
 }
 .testimonial .bg-img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(22,20,18,0.72);
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(22,20,18,0.55), rgba(22,20,18,0.9));
 }
 .testimonial .container { position: relative; z-index: 2; }
-.testimonial .quote {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+
+.tst-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
 }
+
+/* --- video --- */
+.tv-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(241,236,226,0.16);
+}
+.tv-player video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.tv-player.playing video { object-fit: contain; }
+
+.tv-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(22,20,18,0.28);
+  border: none; cursor: pointer; padding: 0;
+  transition: background 0.25s;
+}
+.tv-play:hover { background: rgba(22,20,18,0.14); }
+.tv-player.playing .tv-play { display: none; }
+
+.tv-play-ring {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--tomato);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s, background 0.25s;
+}
+.tv-play:hover .tv-play-ring { transform: scale(1.08); background: var(--tomato-2); }
+.tv-play-ring svg { width: 26px; height: 26px; margin-left: 4px; fill: var(--bone); }
+
+.tv-badge {
+  position: absolute; left: 14px; bottom: 14px;
+  z-index: 3;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone);
+  background: rgba(22,20,18,0.6);
+  backdrop-filter: blur(6px);
+  padding: 7px 12px; border-radius: 999px;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.tv-player.playing .tv-badge { opacity: 0; }
+
+/* --- quote --- */
+.tst-body { max-width: 640px; }
 .testimonial .mark {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-weight: 900;
-  font-size: 96px;
-  color: var(--tomato);
-  line-height: 0.5;
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 900;
+  font-size: 84px; color: var(--tomato); line-height: 0.5;
   font-variation-settings: "SOFT" 100, "WONK" 1;
 }
 .testimonial blockquote {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(28px, 3.5vw, 44px);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 900;
+  font-size: clamp(26px, 2.9vw, 40px);
+  line-height: 1.16; letter-spacing: -0.015em;
   font-variation-settings: "SOFT" 100;
-  margin: 24px 0 32px;
+  margin: 26px 0 22px;
 }
 .testimonial blockquote .accent { color: var(--tomato); }
+.tst-secondary {
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.55; opacity: 0.62;
+  margin-bottom: 30px; max-width: 52ch;
+}
 .testimonial .attribution {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  padding-top: 22px;
+  border-top: 1px solid rgba(241,236,226,0.18);
 }
 .testimonial .attribution .sub {
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  text-transform: none;
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: 0;
-  opacity: 0.65;
   display: block;
-  margin-top: 6px;
+  font-family: 'Instrument Serif', serif; font-style: italic;
+  text-transform: none; letter-spacing: 0.01em;
+  font-size: 15px; opacity: 0.55; margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .testimonial { padding: 76px 0; }
+  .tst-grid { grid-template-columns: 1fr; gap: 36px; justify-items: center; }
+  .tv-player { max-width: 300px; }
+  .tst-body { max-width: 100%; text-align: center; }
+  .testimonial .attribution { text-align: center; }
 }
 
 /* ============ GALLERY ============ */
@@ -1777,15 +1830,37 @@ footer .footer-bottom {
     <img src="images/testimonial-bg.jpg" alt="" />
   </div>
   <div class="container">
-    <div class="quote">
-      <div class="mark">&ldquo;</div>
-      <blockquote>
-        Our guests are still talking about the pizza three months later. The team showed up, did their thing, and somehow turned a corporate dinner into the most relaxed evening we&rsquo;ve ever hosted<span class="accent">.</span>
-      </blockquote>
-      <div class="attribution">
-        Sarah K. · Director of People, Vancouver Tech Co.
-        <span class="sub">50-guest summer event · July 2025</span>
+    <div class="tst-grid">
+
+      <div class="tv-player" id="tvPlayer">
+        <video id="tvVideo"
+               poster="images/testimonial-poster.jpg"
+               preload="none" playsinline
+               aria-label="Natalia's table one. testimonial">
+          <source src="video/testimonial-natalia.mp4" type="video/mp4" />
+        </video>
+        <span class="tv-badge">Watch &middot; 0:31</span>
+        <button class="tv-play" id="tvPlayBtn" aria-label="Play testimonial video">
+          <span class="tv-play-ring">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
       </div>
+
+      <div class="tst-body">
+        <div class="mark">&ldquo;</div>
+        <blockquote>
+          Pizza Fridays are a special occasion in our family &mdash; so before we got married, we wanted one last Friday<span class="accent">.</span>
+        </blockquote>
+        <p class="tst-secondary">
+          &ldquo;The whole experience was so seamless, and they made us a custom pizza. Everyone loved it &mdash; it was fantastic.&rdquo;
+        </p>
+        <div class="attribution">
+          Natalia
+          <span class="sub">Pre-wedding celebration &middot; Vancouver</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2231,6 +2306,33 @@ document.addEventListener('keydown', function(e) {
   }
 
   render();
+})();
+</script>
+
+
+<script>
+(function () {
+  var player = document.getElementById("tvPlayer");
+  var video  = document.getElementById("tvVideo");
+  var btn    = document.getElementById("tvPlayBtn");
+  if (!player || !video || !btn) return;
+
+  btn.addEventListener("click", function () {
+    video.controls = true;
+    player.classList.add("playing");
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {
+      // If playback with sound is blocked, fall back to muted
+      video.muted = true;
+      video.play();
+    });
+  });
+
+  video.addEventListener("ended", function () {
+    player.classList.remove("playing");
+    video.controls = false;
+    video.currentTime = 0;
+  });
 })();
 </script>
 
