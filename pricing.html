@@ -1069,16 +1069,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     else { cta.innerHTML = "Book now &nbsp;&rarr;"; cta.href = "#quoteForm"; var fg = document.getElementById("guests"); if (fg) fg.value = guests; }
 
     // Pills
-    var sPillEls = document.querySelectorAll(".pc-salad");
-  for (var k = 0; k < sPillEls.length; k++) {
-    sPillEls[k].addEventListener("click", function () {
-      var key = this.getAttribute("data-s");
-      salads[key] = !salads[key];
-      render();
-    });
-  }
-
-  var pills = document.querySelectorAll(".pc-pill[data-g]");
+    var pills = document.querySelectorAll(".pc-pill[data-g]");
     for (var i = 0; i < pills.length; i++) {
       var g = parseInt(pills[i].getAttribute("data-g"), 10);
       var enabled = g < 2 || !!tier.two;
@@ -1146,6 +1137,15 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     pills[i].addEventListener("click", function () {
       if (this.disabled) return;
       gourmet = parseInt(this.getAttribute("data-g"), 10);
+      render();
+    });
+  }
+
+  var sPillEls = document.querySelectorAll(".pc-salad");
+  for (var k = 0; k < sPillEls.length; k++) {
+    sPillEls[k].addEventListener("click", function () {
+      var key = this.getAttribute("data-s");
+      salads[key] = !salads[key];
       render();
     });
   }
