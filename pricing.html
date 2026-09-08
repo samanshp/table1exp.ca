@@ -1016,8 +1016,8 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   var saladKeys = function () {
     var k = []; if (salads.crudite) k.push("crudite"); if (salads.arugula) k.push("arugula"); return k;
   };
-  var saladUnits = function (g) { return Math.ceil(g / SALAD_PER); };
-  var saladCost  = function (g) { return saladKeys().length * saladUnits(g) * SALAD_RATE; };
+  var saladEach  = function (g) { return Math.round(g / SALAD_PER * SALAD_RATE); };
+  var saladCost  = function (g) { return saladKeys().length * saladEach(g); };
   var tierFor = function (g) {
     if (g > 50) return CUSTOM;
     for (var i = 0; i < TIERS.length; i++) if (g <= TIERS[i].max) return TIERS[i];
@@ -1078,7 +1078,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     });
   }
 
-  var pills = document.querySelectorAll(".pc-pill");
+  var pills = document.querySelectorAll(".pc-pill[data-g]");
     for (var i = 0; i < pills.length; i++) {
       var g = parseInt(pills[i].getAttribute("data-g"), 10);
       var enabled = g < 2 || !!tier.two;
@@ -1103,8 +1103,8 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
     if (custom) {
       sHelp = "Salad quantities are set with your custom quote.";
     } else {
-      sHelp = "$" + SALAD_RATE + " per salad for every " + SALAD_PER + " guests, rounded up. " +
-              "At " + guests + " guests that's " + money(saladUnits(guests) * SALAD_RATE) + " per salad.";
+      sHelp = "$" + SALAD_RATE + " per salad for every " + SALAD_PER + " guests. " +
+              "At " + guests + " guests that's " + money(saladEach(guests)) + " per salad.";
     }
     $("pcSaladHelp").textContent = sHelp;
 
@@ -1141,7 +1141,7 @@ document.getElementById('quoteForm').addEventListener('submit', async function(e
   $("pcPlus").addEventListener("click", function () { setCount(guests + 1); });
   $("pcSlider").addEventListener("input", function (e) { setCount(Number(e.target.value)); });
 
-  var pills = document.querySelectorAll(".pc-pill");
+  var pills = document.querySelectorAll(".pc-pill[data-g]");
   for (var i = 0; i < pills.length; i++) {
     pills[i].addEventListener("click", function () {
       if (this.disabled) return;
