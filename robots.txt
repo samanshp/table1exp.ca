@@ -1,5 +1,3 @@
 User-agent: *
 Disallow: /feedback
 Disallow: /feedback.html
-
-Sitemap: https://www.table1exp.ca/sitemap.xml
